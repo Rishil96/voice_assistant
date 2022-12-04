@@ -118,7 +118,7 @@ def initial_greeting():
 # Clean request for searching the internet
 def clean_request_for_assistant(command, sentence):
     search_phrase = sentence.split(command)[1]
-    return search_phrase
+    return search_phrase.strip()
 
 
 # main function of the assistant
@@ -168,14 +168,39 @@ def my_assistant():
         elif "search for" in my_request:
             speak("Sure thing!")
             topic = clean_request_for_assistant("search for", my_request)
-            pywhatkit.search(topic)
-
             speak("Here is what I found.")
+            pywhatkit.search(topic)
+            continue
 
         elif "play" in my_request:
             speak("A great idea!! I'll play it right now")
             topic = clean_request_for_assistant("play", my_request)
             pywhatkit.playonyt(topic)
+            continue
+
+        elif "joke" in my_request:
+            speak(pyjokes.get_joke())
+            continue
+
+        elif "share price of" in my_request or "stock price of" in my_request:
+            speak("Just a moment... Pulling up the prices.")
+            share_name = clean_request_for_assistant("of", my_request)
+            portfolio = {
+                "apple": "APPL",
+                "google": "GOOGL",
+                "amazon": "AMZN",
+            }
+            searched_share = portfolio.get(share_name, None)
+
+            if searched_share is None:
+                speak("Sorry, I didn't get that, please say again.")
+                continue
+
+            else:
+                searched_share = yf.Ticker(searched_share)
+                share_price = searched_share.info["regularMarketPrice"]
+                speak(f"I found it! The current market price of {share_name} is {share_price} dollars.")
+                continue
 
 
 my_assistant()
