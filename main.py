@@ -53,4 +53,12 @@ def transform_audio_into_string():
             return "I am still listening..."
 
 
-transform_audio_into_string()
+# Function for assistant reply
+def speak(message):
+
+    # start engine
+    engine = pyttsx3.init()
+
+    # deliver message
+    engine.say(message)
+    engine.runAndWait()
