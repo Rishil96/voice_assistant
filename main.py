@@ -113,3 +113,32 @@ def initial_greeting():
 
     # Give initial greeting to the user
     speak("Hey there, I am Friday.")
+
+
+# main function of the assistant
+def my_assistant():
+
+    # Activate the initial greeting
+    initial_greeting()
+
+    # Assistant active
+    is_on = True
+
+    while is_on:
+
+        my_request = transform_audio_into_string().lower()
+
+        # Open youtube
+        if "open youtube" in my_request:
+            speak("Sure, I am opening Youtube!")
+            webbrowser.open("https://www.youtube.com")
+            continue
+
+        # Open google
+        elif "open browser" in my_request or "open google" in my_request:
+            speak("Of course, I am on it!")
+            webbrowser.open("https://www.google.com")
+            continue
+
+
+my_assistant()
