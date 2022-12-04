@@ -108,9 +108,8 @@ def ask_time():
     speak(message)
 
 
-# # ask_time()
-# engine = pyttsx3.init()
-#
-# for voice in engine.getProperty("voices"):
-#     print(voice)
-#     print(type(voice))
+# Initial greeting
+def initial_greeting():
+
+    # Give initial greeting to the user
+    speak("Hey there, I am Friday.")
