@@ -202,5 +202,9 @@ def my_assistant():
                 speak(f"I found it! The current market price of {share_name} is {share_price} dollars.")
                 continue
 
+        elif "goodbye" in my_request or "good bye" in my_request:
+            speak("Okay, I'll get some rest now. Call me again if you need anything!")
+            is_on = False
+
 
 my_assistant()
