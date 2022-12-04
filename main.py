@@ -115,6 +115,12 @@ def initial_greeting():
     speak("Hey there, I am Friday.")
 
 
+# Clean request for searching the internet
+def clean_request_for_assistant(command, sentence):
+    search_phrase = sentence.split(command)[1]
+    return search_phrase
+
+
 # main function of the assistant
 def my_assistant():
 
@@ -139,6 +145,37 @@ def my_assistant():
             speak("Of course, I am on it!")
             webbrowser.open("https://www.google.com")
             continue
+
+        # today's day
+        elif "what day is today" in my_request:
+            ask_day()
+            continue
+
+        # time
+        elif "what time" in my_request or "what is the time" in my_request:
+            ask_time()
+            continue
+
+        # wikipedia search
+        elif "wikipedia search for" in my_request:
+            speak("I am on it!")
+            topic = clean_request_for_assistant("wikipedia search for", my_request)
+            answer = wikipedia.summary(topic, sentences=1)
+
+            speak(f"According to Wikipedia, {answer}")
+            continue
+
+        elif "search for" in my_request:
+            speak("Sure thing!")
+            topic = clean_request_for_assistant("search for", my_request)
+            pywhatkit.search(topic)
+
+            speak("Here is what I found.")
+
+        elif "play" in my_request:
+            speak("A great idea!! I'll play it right now")
+            topic = clean_request_for_assistant("play", my_request)
+            pywhatkit.playonyt(topic)
 
 
 my_assistant()
