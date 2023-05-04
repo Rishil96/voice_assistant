@@ -134,6 +134,7 @@ def my_assistant():
 
         my_request = transform_audio_into_string().lower()
 
+        # all commands for voice assistant
         # Open youtube
         if "open youtube" in my_request:
             speak("Sure, I am opening Youtube!")
